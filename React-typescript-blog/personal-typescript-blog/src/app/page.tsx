@@ -5,7 +5,7 @@ import { Fragment } from "react";
 
 import { Popover } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Footer from "./components/footer";
+import Footer from "./components/footer/footer";
 
 const navigation = [
   { name: "Blogs", href: "/blogs" },
