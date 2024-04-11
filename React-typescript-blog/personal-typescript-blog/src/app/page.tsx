@@ -1,6 +1,15 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { BlogList, PortfolioList, BaseLayout } from "./components";
+import { getFileNames, getDirectory } from "../../lib/markdown";
+
+export const fetchBlogs = async () : Promise<string[]> => {
+  const directory = getDirectory("content/blogs");
+  const fileNames = getFileNames(directory);
+  console.log(fileNames);
+  return fileNames
+
+}
 
 const Home: NextPage = () => {
   return (
