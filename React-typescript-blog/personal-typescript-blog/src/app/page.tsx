@@ -1,17 +1,13 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { BlogList, PortfolioList, BaseLayout } from "./components";
-import { getFileNames, getDirectory, getItemInPath } from "../../lib/markdown";
+import { getBlogFileNames, getBlog } from "../../lib/markdown";
 
 export const fetchBlogs = async () : Promise<string[]> => {
-  const directory = getDirectory("content/blogs");
-  const fileNames = getFileNames(directory);
-  console.log(fileNames);
+  const fileNames = getBlogFileNames();
   fileNames.forEach((fileName) => {
-    const postContent = getItemInPath(`${directory}/${fileName}`);
+    const postContent = getBlog(fileName)
     console.log(postContent);
-
-
   })
   return fileNames
 
