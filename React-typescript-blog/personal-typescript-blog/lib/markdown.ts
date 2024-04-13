@@ -1,5 +1,6 @@
 import fs from "fs";
 import { join } from "path";
+import { Blog } from "../interfaces/Blog";
 const getFileNames = (dir: string): string[] => {
   return fs.readdirSync(dir);
 };
