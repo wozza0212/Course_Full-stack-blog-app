@@ -1,17 +1,24 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { BlogList, PortfolioList, BaseLayout } from "./components";
-import { getFileNames, getDirectory } from "../../lib/markdown";
+import { getFileNames, getDirectory, getItemInPath } from "../../lib/markdown";
 
 export const fetchBlogs = async () : Promise<string[]> => {
   const directory = getDirectory("content/blogs");
   const fileNames = getFileNames(directory);
   console.log(fileNames);
+  fileNames.forEach((fileName) => {
+    const postContent = getItemInPath(`${directory}/${fileName}`);
+    console.log(postContent);
+
+
+  })
   return fileNames
 
 }
 
 const Home: NextPage = () => {
+  fetchBlogs();
   return (
     <BaseLayout>
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
