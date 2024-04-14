@@ -1,14 +1,13 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { BlogList, PortfolioList, BaseLayout } from "./components";
-import { getBlogFileNames, getBlog } from "../../lib/markdown";
+import { getBlogs } from "../../lib/markdown";
 
 export const fetchBlogs = async () : Promise<object> => {
-  const fileNames = getBlogFileNames();
-  fileNames.forEach((fileName) => {
-    const post = getBlog(fileName)
-    console.log(post);
-  })
+
+  const blogs = getBlogs();
+  console.log(blogs)
+  
   return {
     props: {}
   }

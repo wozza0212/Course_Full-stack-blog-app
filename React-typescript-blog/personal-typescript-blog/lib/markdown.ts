@@ -27,7 +27,18 @@ const getBlog = (fileName: string): Blog => {
   const blog = getItemInPath(`${BLOG_DIR}/${fileName}`) as Blog;
   return blog;
 };
+const getAllItems = (filenames : string[]) => {
+  const items = filenames.map((filename) =>getBlog(filename))
+  return items
+}
+
+const getBlogs = () : Blog[]=> {
+  const blogFileNames = getBlogFileNames();
+  return getAllItems(blogFileNames);
+
+}
 export {
   getBlogFileNames,
   getBlog,
+  getBlogs
 };
