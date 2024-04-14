@@ -3,13 +3,15 @@ import Link from "next/link";
 import { BlogList, PortfolioList, BaseLayout } from "./components";
 import { getBlogFileNames, getBlog } from "../../lib/markdown";
 
-export const fetchBlogs = async () : Promise<string[]> => {
+export const fetchBlogs = async () : Promise<object> => {
   const fileNames = getBlogFileNames();
   fileNames.forEach((fileName) => {
-    const postContent = getBlog(fileName)
-    console.log(postContent);
+    const post = getBlog(fileName)
+    console.log(post);
   })
-  return fileNames
+  return {
+    props: {}
+  }
 
 }
 
