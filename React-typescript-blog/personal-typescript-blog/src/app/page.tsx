@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { BlogList, PortfolioList, BaseLayout } from "./components";
-import { getBlogs } from "../../lib/markdown";
+import { getBlogs } from "../../lib/blogs";
 
 export const fetchBlogs = async () : Promise<object> => {
 
