@@ -1,6 +1,5 @@
 import fs from "fs";
 import { join } from "path";
-import { Blog } from "../interfaces/Blog";
 import matter from "gray-matter";
 import { MarkdownItem } from "../interfaces/Markdown";
 const getFileNames = (dir: string): string[] => {
@@ -19,26 +18,20 @@ const getItemInPath = (filePath: string): MarkdownItem => {
   return {...data, content} as MarkdownItem
 };
 
-const getBlogFileNames = () => {
-  return getFileNames(BLOG_DIR);
-};
-
-const getBlog = (fileName: string): Blog => {
-  const blog = getItemInPath(`${BLOG_DIR}/${fileName}`) as Blog;
-  return blog;
-};
-const getAllItems = (filenames : string[]) => {
-  const items = filenames.map((filename) =>getBlog(filename))
-  return items
+const getAllItems = (filenames : string[],
+  get: (name : string) => MarkdownItem
+) => {
+const items = filenames.map((filename) =>get(filename))
+return items
 }
 
-const getBlogs = () : Blog[]=> {
-  const blogFileNames = getBlogFileNames();
-  return getAllItems(blogFileNames);
 
-}
+
+
+
 export {
-  getBlogFileNames,
-  getBlog,
-  getBlogs
+  getItemInPath,
+  getFileNames,
+  getDirectory,
+  getAllItems
 };
