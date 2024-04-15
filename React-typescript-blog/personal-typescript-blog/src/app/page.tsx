@@ -2,20 +2,14 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { BlogList, PortfolioList, BaseLayout } from "./components";
 import { getBlogs } from "../../lib/blogs";
+import { Blog } from "../../interfaces/Blog";
 
-export const fetchBlogs = async () : Promise<object> => {
 
-  const blogs = getBlogs();
-  console.log(blogs)
-  
-  return {
-    props: {}
-  }
-
+type Props = {
+  blogs: Blog[]
 }
-
-const Home: NextPage = () => {
-  fetchBlogs();
+const Home: NextPage<Props> = () => {
+  const blogs = getBlogs();
   return (
     <BaseLayout>
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
@@ -24,7 +18,7 @@ const Home: NextPage = () => {
             <a className="text-sm ml-1 text-indigo-600">(See All)</a>
           </Link>
         </h2>
-        <BlogList />
+        <BlogList blogs={blogs}/>
         <br></br>
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           Portfolios
