@@ -18,19 +18,27 @@ const getBlog = (fileName: string): Blog => {
   return blog;
 };
 
+const getAllBlogSlugs = () => {
+  return getBlogFileNames().map((fileName) => fileName.replace(".md", ""));
+  // return getBlogFileNames().map((fileName) => fileName.replace(/\.md$/, ""));
+};
+
 const getBlogs = (): Blog[] => {
   const blogFileNames = getBlogFileNames();
   return getAllItems(blogFileNames, getBlog) as Blog[];
 };
 
-export const fetchBlogs = async () : Promise<object> => {
-
-  const blogs = getBlogs();
-  console.log(blogs)
-  
-  return {
-    props: {blogs}
-  }
-
+const getBlogBySlug = (slug: string): Blog => {
+  const fileName = slug + ".md";
+  return getBlog(fileName);
 }
-export { getBlogFileNames, getBlog, getBlogs };
+
+export const fetchBlogs = async (): Promise<object> => {
+  const blogs = getBlogs();
+  console.log(blogs);
+
+  return {
+    props: { blogs },
+  };
+};
+export { getBlogFileNames, getBlog, getBlogs, getAllBlogSlugs, getBlogBySlug };
