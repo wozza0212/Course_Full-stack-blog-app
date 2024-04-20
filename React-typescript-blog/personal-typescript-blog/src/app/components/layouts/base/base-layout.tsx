@@ -2,8 +2,9 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/legacy/image";
 import { Navbar, Footer, Header } from "../..";
+import { FunctionComponent, PropsWithChildren } from "react";
 
-const BaseLayout = ({children}: any) => {
+const BaseLayout : FunctionComponent<PropsWithChildren> = ({children}: any) => {
     return (
         <>
         <div className="mx-auto max-w-7xl px-4 space-y-8 sm:px-6 lg:px-8">
@@ -28,7 +29,9 @@ const BaseLayout = ({children}: any) => {
               />
             </div>
           </div>
+          <div className="mx-auto max-w-2xl px-4 lg:max-w-7xl">
           { children }
+        </div>
         </div>
         <Footer />
       </>
