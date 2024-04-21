@@ -3,6 +3,7 @@ import {
   getFileNames,
   getItemInPath,
   getAllItems,
+  markdownToHTML,
 } from "./markdown";
 import { Blog } from "../interfaces/Blog";
 
@@ -33,6 +34,12 @@ const getBlogBySlug = (slug: string): Blog => {
   return getBlog(fileName);
 }
 
+const getBlogBySlugWithMarkdown = async (slug : string) : Promise<Blog>=> {
+  const blog = getBlogBySlug(slug)
+  blog.content = await markdownToHTML(blog.content)
+  return blog
+}
+
 export const fetchBlogs = async (): Promise<object> => {
   const blogs = getBlogs();
   console.log(blogs);
@@ -41,4 +48,4 @@ export const fetchBlogs = async (): Promise<object> => {
     props: { blogs },
   };
 };
-export { getBlogFileNames, getBlog, getBlogs, getAllBlogSlugs, getBlogBySlug };
+export { getBlogFileNames, getBlog, getBlogs, getAllBlogSlugs, getBlogBySlug, getBlogBySlugWithMarkdown };

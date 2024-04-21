@@ -2,6 +2,9 @@ import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 import { MarkdownItem } from "../interfaces/Markdown";
+import html from "remark-html";
+import {remark} from "remark";
+import remarkGfm from "remark-gfm";
 const getFileNames = (dir: string): string[] => {
   return fs.readdirSync(dir);
 };
@@ -25,6 +28,15 @@ const items = filenames.map((filename) =>get(filename))
 return items
 }
 
+const markdownToHTML =  async( markdown : string) => {
+  const result = await remark()
+  .use(html)
+  .use(remarkGfm)
+  .process(markdown)
+  return result.toString()
+
+}
+
 
 
 
@@ -33,5 +45,6 @@ export {
   getItemInPath,
   getFileNames,
   getDirectory,
-  getAllItems
+  getAllItems,
+  markdownToHTML
 };

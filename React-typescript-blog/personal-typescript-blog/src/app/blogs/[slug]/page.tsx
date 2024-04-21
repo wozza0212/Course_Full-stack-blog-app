@@ -1,6 +1,6 @@
 import { Metadata, NextPage } from 'next/types';
 import { PageLayout } from '../../components';
-import { getAllBlogSlugs, getBlogBySlug } from '../../../../lib/blogs';
+import { getAllBlogSlugs, getBlogBySlugWithMarkdown } from '../../../../lib/blogs';
 import { Blog } from '../../../../interfaces/Blog';
 import Image from "next/legacy/image";
 
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
 };
 
 
-const BlogDetail: NextPage<BlogDetailProps> = ({ params }) => {
+const BlogDetail: NextPage<BlogDetailProps> = async ({ params }) => {
   const { slug } = params;
-  const blog: Blog = getBlogBySlug(slug);
+  const blog: Blog = await getBlogBySlugWithMarkdown(slug);
   return (
     <>
       <PageLayout>
@@ -90,7 +90,7 @@ const BlogDetail: NextPage<BlogDetailProps> = ({ params }) => {
             </div>
           </div>
           <article className="prose lg:prose-lg markdown-image-50">
-            {blog.content}
+            <div dangerouslySetInnerHTML={{ __html: blog.content}} />
           </article>
         </div>
       </PageLayout>
